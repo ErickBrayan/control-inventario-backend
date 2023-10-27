@@ -2,7 +2,7 @@ spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         password: 12345
-        url: jdbc:mysql://localhost:3306/db-api-blog
+        url: jdbc:mysql://localhost:3306/db-inventario-minimarket
         username: root
     jpa:
         database-platform: org.hibernate.dialect.MySQL8Dialect
