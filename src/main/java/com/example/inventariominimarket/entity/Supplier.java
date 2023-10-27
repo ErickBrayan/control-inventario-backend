@@ -31,8 +31,8 @@ public class Supplier {
     @CreationTimestamp
     @Column(name = "creation_date",updatable = false,nullable = false)
     private LocalDateTime creationDate;
-    @Enumerated(EnumType.STRING)
 
+    @Enumerated(EnumType.STRING)
     private SupplierStatus supplierStatus;
 
     @PrePersist

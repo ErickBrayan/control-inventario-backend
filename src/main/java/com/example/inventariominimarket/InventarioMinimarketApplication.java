@@ -3,6 +3,7 @@ package com.example.inventariominimarket;
 import com.example.inventariominimarket.entity.Category;
 import com.example.inventariominimarket.entity.Product;
 import com.example.inventariominimarket.repository.CategoryRepository;
+import com.example.inventariominimarket.service.CategoryService;
 import com.example.inventariominimarket.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,7 +18,7 @@ import java.util.List;
 public class InventarioMinimarketApplication {
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryService categoryService;
 
     @Autowired
     private ProductService productService;
@@ -32,11 +33,11 @@ public class InventarioMinimarketApplication {
 
             Category category = Category.builder().name("categoria").description("description").build();
 
-            categoryRepository.save(category);
+            categoryService.save(category);
 
 
 
-            Category category1 = categoryRepository.findById(1L).get();
+            Category category1 = categoryService.findById(1L);
 
 
             Product product = Product.builder().name("name").description("description").price(BigDecimal.valueOf(22.5)).stock(20).category(category1).build();
@@ -47,6 +48,13 @@ public class InventarioMinimarketApplication {
             List<Product> found = productService.findAll();
 
             found.forEach(System.out::println);
+
+
+            List<Category> foundCategory = categoryService.findAll();
+
+            foundCategory.forEach(System.out::println);
+
+
 
         };
     }
