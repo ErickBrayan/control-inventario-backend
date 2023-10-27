@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product{
@@ -22,7 +23,7 @@ public class Product{
     private Long id;
 
     private String name;
-    private Double stock;
+    private int stock;
     private String description;
     private BigDecimal price;
 
