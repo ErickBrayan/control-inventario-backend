@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Product{
 
     @Id
@@ -22,7 +23,7 @@ public class Product{
     private Long id;
 
     private String name;
-    private Double stock;
+    private int stock;
     private String description;
     private BigDecimal price;
 
@@ -37,7 +38,7 @@ public class Product{
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_category")
     private Category category;
 

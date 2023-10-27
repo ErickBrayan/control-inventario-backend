@@ -17,7 +17,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public List<Product> findAll() {
-        return productRepository.findAllProduct();
+        return productRepository.findAll();
     }
 
     @Override
@@ -42,8 +42,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public Boolean delete(Long id) {
-        return productRepository.deleteProduct(id);
+    public boolean delete(Long id) {
+        if (productRepository.existsById(id)){
+            productRepository.deleteById(id);
+            return true;
+        }
+
+        return false;
     }
 
 

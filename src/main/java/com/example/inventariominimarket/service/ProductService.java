@@ -10,5 +10,5 @@ public interface ProductService {
     Product findById(Long id);
     Product save(Product product);
     Product update(Product product,Long id);
-    Boolean delete(Long id);
+    boolean delete(Long id);
 }
