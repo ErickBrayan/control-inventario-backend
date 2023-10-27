@@ -37,7 +37,7 @@ public class Product{
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_category")
     private Category category;
 
