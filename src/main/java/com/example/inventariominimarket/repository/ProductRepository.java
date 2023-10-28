@@ -2,6 +2,7 @@ package com.example.inventariominimarket.repository;
 
 import com.example.inventariominimarket.entity.Product;
 
+import com.example.inventariominimarket.payload.response.ProductResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
-    @Query("FROM Product WHERE productStatus = com.example.inventariominimarket.entity.ProductStatus.CREATED")
+    @Query("FROM Product p WHERE p.productStatus = com.example.inventariominimarket.entity.ProductStatus.CREATED")
     List<Product> findAllProduct();
 
     @Modifying

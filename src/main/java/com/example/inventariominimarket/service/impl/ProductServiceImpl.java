@@ -1,6 +1,8 @@
 package com.example.inventariominimarket.service.impl;
 
 import com.example.inventariominimarket.entity.Product;
+import com.example.inventariominimarket.mapper.ProductMapper;
+import com.example.inventariominimarket.payload.response.ProductResponseDTO;
 import com.example.inventariominimarket.repository.ProductRepository;
 import com.example.inventariominimarket.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +16,13 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+
+    private final ProductMapper productMapper;
     @Override
     @Transactional
-    public List<Product> findAll() {
-        return productRepository.findAllProduct();
+    public List<ProductResponseDTO> findAll() {
+        return productMapper.toDTOList(productRepository.findAllProduct());
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.inventariominimarket.controller;
 
 import com.example.inventariominimarket.entity.Product;
+import com.example.inventariominimarket.payload.response.ProductResponseDTO;
 import com.example.inventariominimarket.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class ProductController {
 
     @GetMapping("")
     public ResponseEntity<?> getAll() {
-        List<Product> products = productService.findAll();
+        List<ProductResponseDTO> products = productService.findAll();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

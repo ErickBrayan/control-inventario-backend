@@ -2,6 +2,7 @@ package com.example.inventariominimarket;
 
 import com.example.inventariominimarket.entity.Category;
 import com.example.inventariominimarket.entity.Product;
+import com.example.inventariominimarket.payload.response.ProductResponseDTO;
 import com.example.inventariominimarket.repository.CategoryRepository;
 import com.example.inventariominimarket.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class InventarioMinimarketApplication {
     CommandLineRunner commandLineRunner(){
         return args -> {
 
-            Category category = Category.builder().name("categoria").description("description").build();
+            /*ategory category = Category.builder().name("categoria").description("description").build();
 
             categoryRepository.save(category);
 
@@ -41,10 +42,10 @@ public class InventarioMinimarketApplication {
 
             Product product = Product.builder().name("name").description("description").price(BigDecimal.valueOf(22.5)).stock(20).category(category1).build();
 
-            //productService.save(product);
+            //productService.save(product);*/
 
 
-            List<Product> found = productService.findAll();
+            List<ProductResponseDTO> found = productService.findAll();
 
             found.forEach(System.out::println);
 
