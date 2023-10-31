@@ -4,7 +4,7 @@
 **1. Clonar la Aplicación**
 
 ```bash
-git clone https://github.com/ErickBrayan/Spring-Boot-Guide.git
+git clone https://github.com/ErickBrayan/control-inventario-backend.git
 ```
 
 **2. Crear Base de Datos MySQL**
@@ -14,10 +14,10 @@ create database db-inventario-minimarket
 
 **3. Cambiar username y para para la instalacion**
 
-+ open `src/main/resources/application.yml`
++ abrir `src/main/resources/application.yml`
 + cambiar `spring.datasource.username` y `spring.datasource.password` segun tu MySQL
 
-**4. Run the app using maven**
+**4. iniciar aplicacion usando maven**
 
 ```bash
 mvn spring-boot:run
