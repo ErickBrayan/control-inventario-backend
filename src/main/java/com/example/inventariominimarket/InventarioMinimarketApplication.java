@@ -2,7 +2,6 @@ package com.example.inventariominimarket;
 
 import com.example.inventariominimarket.entity.Category;
 import com.example.inventariominimarket.entity.Product;
-import com.example.inventariominimarket.repository.CategoryRepository;
 import com.example.inventariominimarket.service.CategoryService;
 import com.example.inventariominimarket.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
