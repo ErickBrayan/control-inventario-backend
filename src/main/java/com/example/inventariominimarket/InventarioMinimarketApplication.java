@@ -1,8 +1,8 @@
 package com.example.inventariominimarket;
 
+import com.example.inventariominimarket.dto.response.ProductResponseDTO;
 import com.example.inventariominimarket.entity.Category;
 import com.example.inventariominimarket.entity.Product;
-import com.example.inventariominimarket.payload.response.ProductResponseDTO;
 import com.example.inventariominimarket.repository.CategoryRepository;
 import com.example.inventariominimarket.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
@@ -31,25 +32,25 @@ public class InventarioMinimarketApplication {
     CommandLineRunner commandLineRunner(){
         return args -> {
 
-            /*ategory category = Category.builder().name("categoria").description("description").build();
+            /*Category category = Category.builder().description("description").build();
 
             categoryRepository.save(category);
 
 
+            Product product = Product.builder()
+                    .name("name")
+                    .description("description")
+                    .stock(10)
+                    .batch("batch")
+                    .dueDate(LocalDate.now())
+                    .purchasePrice(BigDecimal.ONE)
+                    .salePrice(BigDecimal.ONE)
+                    .category(category).build();
 
-            Category category1 = categoryRepository.findById(1L).get();
+
+            productService.save(product);*/
 
 
-            Product product = Product.builder().name("name").description("description").price(BigDecimal.valueOf(22.5)).stock(20).category(category1).build();
-
-            //productService.save(product);*/
-
-
-            List<ProductResponseDTO> found = productService.findAll();
-
-            found.forEach(System.out::println);
-
-            //productService.delete(5L);
 
 
 

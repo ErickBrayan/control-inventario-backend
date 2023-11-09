@@ -1,7 +1,8 @@
 package com.example.inventariominimarket.controller;
 
+import com.example.inventariominimarket.dto.request.ProductRequestDTO;
 import com.example.inventariominimarket.entity.Product;
-import com.example.inventariominimarket.payload.response.ProductResponseDTO;
+import com.example.inventariominimarket.dto.response.ProductResponseDTO;
 import com.example.inventariominimarket.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,9 +21,9 @@ public class ProductController {
 
     @GetMapping("")
     public ResponseEntity<?> getAll() {
-        List<ProductResponseDTO> products = productService.findAll();
-        return new ResponseEntity<>(products, HttpStatus.OK);
+        return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id) {
@@ -35,8 +36,8 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
     @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody Product product) {
-        return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
+    public ResponseEntity<?> save(@RequestBody ProductRequestDTO productRequestDTO) {
+        return new ResponseEntity<>(productService.save(productRequestDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
