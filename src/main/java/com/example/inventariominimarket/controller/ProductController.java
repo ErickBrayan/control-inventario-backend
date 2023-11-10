@@ -28,12 +28,24 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id) {
 
-        Product product = productService.findById(id);
+        ProductResponseDTO product = productService.findById(id);
 
         if (product == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(product, HttpStatus.OK);
+    }
+
+    /**
+     * Recupera una lista de productos que caducarán en el número especificado de días..
+     *
+     * @param days El número de días hasta la caducidad. Por defecto, es 20 si no se especifica.
+     * @return Un ResponseEntity que contiene la lista de productos y un código de estado 200 (OK).
+     */
+    @GetMapping("/toExpired")
+    public ResponseEntity<?> getProductToExpired(@RequestParam(required = false,defaultValue = "20") int days) {
+
+        return new ResponseEntity<>(productService.findAllProductToExpired(days), HttpStatus.OK);
     }
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody ProductRequestDTO productRequestDTO) {
@@ -41,12 +53,21 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Product product) {
-        return new ResponseEntity<>(productService.update(product,id), HttpStatus.OK);
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ProductRequestDTO productRequestDTO) {
+        Product product = productService.update(productRequestDTO,id);
+        if (product == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @DeleteMapping ("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        return new ResponseEntity<>(productService.delete(id), HttpStatus.NO_CONTENT);
+
+        Integer res = productService.delete(id);
+        if (res == 3) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(res, HttpStatus.NO_CONTENT);
     }
 }

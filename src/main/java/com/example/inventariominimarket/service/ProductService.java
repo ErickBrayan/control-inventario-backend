@@ -9,8 +9,10 @@ import java.util.List;
 public interface ProductService {
 
     List<ProductResponseDTO> findAll();
-    Product findById(Long id);
+
+    List<ProductResponseDTO> findAllProductToExpired(int days);
+    ProductResponseDTO findById(Long id);
     Product save(ProductRequestDTO productRequestDTO);
-    Product update(Product product,Long id);
+    Product update(ProductRequestDTO productRequestDTO,Long id);
     Integer delete(Long id);
 }

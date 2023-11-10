@@ -19,6 +19,7 @@ public interface ProductMapper {
     @Mapping(source = "product.name",target = "name")
     @Mapping(source = "product.stock",target = "stock")
     @Mapping(source = "product.batch",target = "batch")
+    @Mapping(source = "product.dueDate",target = "dueDate")
     @Mapping(source = "product.purchasePrice",target = "purchasePrice")
     @Mapping(source = "product.salePrice",target = "salePrice")
     @Mapping(source = "product.creationDate",target = "creationDate")
