@@ -1,6 +1,7 @@
 package com.example.inventariominimarket.service.impl;
 
 import com.example.inventariominimarket.dto.request.ProductRequestDTO;
+import com.example.inventariominimarket.entity.Category;
 import com.example.inventariominimarket.entity.Product;
 import com.example.inventariominimarket.entity.ProductStatus;
 import com.example.inventariominimarket.mapper.ProductMapper;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,29 +33,25 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toDTOList(productRepository.findAllProduct());
     }
 
-    /**
-     * Encuentra todos los productos que vencerán en un número específico de días a partir de la fecha actual.
-     * @param days El número de días dentro de los cuales los productos caducarán.
-     * @return Una lista de objetos ProductResponseDTO que representan los productos que caducarán dentro del número especificado de días.
-     */
     @Override
     public List<ProductResponseDTO> findAllProductToExpired(int days) {
-
         LocalDate nowDate = LocalDate.now();
 
-        List<ProductResponseDTO> productResponseDTOList = new ArrayList<>();
+        return productRepository.findAllProduct().stream()
+                .filter(product -> {
+                    long daysToExpired = ChronoUnit.DAYS.between(nowDate, product.getDueDate());
+                    return daysToExpired > 0 && daysToExpired <= days;
+                })
+                .map(productMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 
-        List<Product> products = productRepository.findAllProduct();
-
-        for (Product product : products) {
-            long daysToExpired = ChronoUnit.DAYS.between(nowDate, product.getDueDate());
-            if (daysToExpired > 0 && daysToExpired <= days) {
-                log.info("Product: {}", product);
-                productResponseDTOList.add(productMapper.toDTO(product));
-            }
-        }
-
-        return productResponseDTOList;
+    @Override
+    public List<ProductResponseDTO> findAllProductByStock(int stock) {
+        return productRepository.findAllProduct().stream()
+                .filter(product -> product.getStock() <= stock)
+                .map(productMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -61,6 +59,19 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponseDTO findById(Long id) {
         return productMapper.toDTO(productRepository.findById(id).orElse(null));
     }
+
+    @Override
+    public List<ProductResponseDTO> findAllByCategory(Long id) {
+        Category category = new Category();
+        category.setId(id);
+        return productMapper.toDTOList(productRepository.findAllByCategory(category));
+    }
+
+    @Override
+    public List<ProductResponseDTO> findAllByName(String name) {
+        return productMapper.toDTOList(productRepository.findAllByNameContaining(name));
+    }
+
 
     @Override
     @Transactional

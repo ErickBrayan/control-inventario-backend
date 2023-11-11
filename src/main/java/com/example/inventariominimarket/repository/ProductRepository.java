@@ -1,5 +1,6 @@
 package com.example.inventariominimarket.repository;
 
+import com.example.inventariominimarket.entity.Category;
 import com.example.inventariominimarket.entity.Product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,9 +16,11 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query("FROM Product p WHERE p.productStatus = com.example.inventariominimarket.entity.ProductStatus.CREATED")
     List<Product> findAllProduct();
 
-
-
     @Modifying
     @Query("UPDATE Product p SET p.productStatus = com.example.inventariominimarket.entity.ProductStatus.DELETED WHERE p.id = :id")
     Integer deleteProduct(@Param("id") Long id);
+
+    List<Product> findAllByCategory(Category category);
+
+    List<Product> findAllByNameContaining(String name);
 }

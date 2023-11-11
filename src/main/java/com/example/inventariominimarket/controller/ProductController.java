@@ -47,6 +47,25 @@ public class ProductController {
 
         return new ResponseEntity<>(productService.findAllProductToExpired(days), HttpStatus.OK);
     }
+
+    @GetMapping("/byStock")
+    public ResponseEntity<?> getProductByStock(@RequestParam(required = false,defaultValue = "5") int stock) {
+
+        return new ResponseEntity<>(productService.findAllProductByStock(stock), HttpStatus.OK);
+    }
+
+    @GetMapping("/byCategory/{id}")
+    public ResponseEntity<?> getProductByStock(@PathVariable Long id) {
+
+        return new ResponseEntity<>(productService.findAllByCategory(id), HttpStatus.OK);
+    }
+    @GetMapping("/byName/{name}")
+    public ResponseEntity<?> getProductByStock(@PathVariable String name) {
+
+        return new ResponseEntity<>(productService.findAllByName(name), HttpStatus.OK);
+    }
+
+
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody ProductRequestDTO productRequestDTO) {
         return new ResponseEntity<>(productService.save(productRequestDTO), HttpStatus.CREATED);
