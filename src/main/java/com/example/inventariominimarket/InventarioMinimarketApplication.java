@@ -1,8 +1,9 @@
 package com.example.inventariominimarket;
 
+import com.example.inventariominimarket.dto.response.ProductResponseDTO;
 import com.example.inventariominimarket.entity.Category;
 import com.example.inventariominimarket.entity.Product;
-import com.example.inventariominimarket.service.CategoryService;
+import com.example.inventariominimarket.repository.CategoryRepository;
 import com.example.inventariominimarket.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,13 +12,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
 public class InventarioMinimarketApplication {
 
     @Autowired
-    private CategoryService categoryService;
+    private CategoryRepository categoryRepository;
 
     @Autowired
     private ProductService productService;
@@ -30,31 +32,23 @@ public class InventarioMinimarketApplication {
     CommandLineRunner commandLineRunner(){
         return args -> {
 
-            Category category = Category.builder().name("categoria").description("description").build();
+            /*Category category = Category.builder().description("description").build();
 
-            categoryService.save(category);
-
-
-
-            Category category1 = categoryService.findById(1L);
+            categoryRepository.save(category);
 
 
-            Product product = Product.builder().name("name").description("description").price(BigDecimal.valueOf(22.5)).stock(20).category(category1).build();
-
-            productService.save(product);
-
-
-            List<Product> found = productService.findAll();
-
-            found.forEach(System.out::println);
-
-
-            List<Category> foundCategory = categoryService.findAll();
-
-            foundCategory.forEach(System.out::println);
+            Product product = Product.builder()
+                    .name("name")
+                    .description("description")
+                    .stock(10)
+                    .batch("batch")
+                    .dueDate(LocalDate.now())
+                    .purchasePrice(BigDecimal.ONE)
+                    .salePrice(BigDecimal.ONE)
+                    .category(category).build();
 
 
-
+            productService.save(product);*/
         };
     }
 
