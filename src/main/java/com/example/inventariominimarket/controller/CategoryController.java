@@ -1,5 +1,6 @@
 package com.example.inventariominimarket.controller;
 
+
 import com.example.inventariominimarket.dto.Message;
 import com.example.inventariominimarket.dto.request.CategoryRequestDTO;
 import com.example.inventariominimarket.dto.response.CategoryResponseDTO;
@@ -62,3 +63,4 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Category eliminado");
     }
 }
+

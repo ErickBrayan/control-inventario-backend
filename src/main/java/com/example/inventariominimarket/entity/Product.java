@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Product{
 
     @Id

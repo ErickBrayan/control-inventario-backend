@@ -49,11 +49,6 @@ public class InventarioMinimarketApplication {
 
 
             productService.save(product);*/
-
-
-
-
-
         };
     }
 

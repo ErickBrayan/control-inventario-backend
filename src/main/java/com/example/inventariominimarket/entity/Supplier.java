@@ -33,9 +33,11 @@ public class Supplier {
     @Column(name = "creation_date",updatable = false,nullable = false)
     private LocalDateTime creationDate;
 
+
     @UpdateTimestamp
     @Column(name = "update_date",nullable = false)
     private LocalDateTime updateDate;
+
 
     @Enumerated(EnumType.STRING)
     private SupplierStatus supplierStatus;
