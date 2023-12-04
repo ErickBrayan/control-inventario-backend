@@ -1,10 +1,15 @@
 package com.example.inventariominimarket.service.impl;
 
+
+import com.example.inventariominimarket.dto.request.CategoryRequestDTO;
+import com.example.inventariominimarket.dto.response.CategoryResponseDTO;
 import com.example.inventariominimarket.entity.Category;
+import com.example.inventariominimarket.mapper.CategoryMapper;
 import com.example.inventariominimarket.repository.CategoryRepository;
 import com.example.inventariominimarket.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,30 +18,40 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
     @Override
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
+    @Transactional
+    public List<CategoryResponseDTO> findAll() {
+        return categoryMapper.toList(categoryRepository.findAll());
     }
 
     @Override
-    public Category findById(Long id) {
-        return categoryRepository.findById(id).orElse(null);
+    @Transactional
+    public CategoryResponseDTO findById(Long id) {
+        return categoryMapper.toDTO(categoryRepository.findById(id).orElse(null));
     }
 
     @Override
-    public Category save(Category category) {
-        return categoryRepository.save(category);
+    @Transactional
+    public Category save(CategoryRequestDTO categoryRequestDTO) {
+        return categoryRepository.save(categoryMapper.toEntity(categoryRequestDTO));
     }
 
     @Override
-    public Category update(Category category, Long id) {
+    @Transactional
+    public Category update(CategoryRequestDTO categoryRequestDTO, Long id) {
         boolean isPresent = categoryRepository.findById(id).isPresent();
+        Category category = categoryMapper.toEntity(categoryRequestDTO);
+        category.setId(id);
         return isPresent ? categoryRepository.save(category) : null;
     }
 
     @Override
+    @Transactional
     public boolean delete(Long id) {
-        if (categoryRepository.existsById(id)){
+        boolean isPresent = categoryRepository.findById(id).isPresent();
+        if (isPresent){
+
             categoryRepository.deleteById(id);
             return true;
         }

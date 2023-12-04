@@ -3,6 +3,7 @@ package com.example.inventariominimarket.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -32,8 +33,15 @@ public class Supplier {
     @Column(name = "creation_date",updatable = false,nullable = false)
     private LocalDateTime creationDate;
 
+
+    @UpdateTimestamp
+    @Column(name = "update_date",nullable = false)
+    private LocalDateTime updateDate;
+
+
     @Enumerated(EnumType.STRING)
     private SupplierStatus supplierStatus;
+
 
     @PrePersist
     void setPrePersit(){

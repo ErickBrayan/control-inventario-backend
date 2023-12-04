@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -23,9 +25,15 @@ public class Product{
     private Long id;
 
     private String name;
-    private int stock;
     private String description;
-    private BigDecimal price;
+    private int stock;
+    private String batch;
+
+    @Column(name = "purchase_price")
+    private BigDecimal purchasePrice;
+
+    @Column(name = "sale_price")
+    private BigDecimal salePrice;
 
     @CreationTimestamp
     @Column(name = "creation_date",updatable = false,nullable = false)
@@ -34,6 +42,9 @@ public class Product{
     @UpdateTimestamp
     @Column(name = "update_date",nullable = false)
     private LocalDateTime updateDate;
+
+    @Column(name = "due_date")
+    private LocalDate dueDate;
 
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
