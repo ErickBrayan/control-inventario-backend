@@ -48,7 +48,7 @@ public class SupplierController {
         Supplier supplier = supplierService.update(supplierRequestDTO,id);
 
         if (supplier == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Supplier no encotrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Supplier doesn't exit");
         }
         return ResponseEntity.status(HttpStatus.OK).body(supplier);
     }
@@ -57,10 +57,10 @@ public class SupplierController {
     public ResponseEntity<?> delete(@PathVariable Long id){
         Integer res = supplierService.delete(id);
         if (res == 3 ){
-            log.info(String.valueOf("Resultado delete --> "+res));
+            log.info("Result delete --> "+res);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("supplier id " +id + " doesn't exit");
         }
-        log.info(String.valueOf("Resultado delete --> "+res));
+        log.info("Resul delete --> "+res);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(res);
     }
 }

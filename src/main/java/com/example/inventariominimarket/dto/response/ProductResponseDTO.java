@@ -2,7 +2,6 @@ package com.example.inventariominimarket.dto.response;
 
 
 import com.example.inventariominimarket.entity.Category;
-import com.example.inventariominimarket.entity.ProductStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

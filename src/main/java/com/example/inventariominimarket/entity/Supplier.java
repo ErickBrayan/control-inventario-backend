@@ -44,7 +44,7 @@ public class Supplier {
 
 
     @PrePersist
-    void setPrePersit(){
+    void setPrePersist(){
         this.supplierStatus = SupplierStatus.CREATED;
     }
 

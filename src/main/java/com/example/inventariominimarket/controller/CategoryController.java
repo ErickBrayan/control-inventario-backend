@@ -31,7 +31,7 @@ public class CategoryController {
         CategoryResponseDTO category = categoryService.findById(id);
         log.info("Category: {}", category);
         if (category == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Message("Category no encontrado"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Message("Category doesn't exist"));
         }
 
         return new ResponseEntity<>(category, HttpStatus.OK);
@@ -49,7 +49,7 @@ public class CategoryController {
         Category category = categoryService.update(categoryRequestDTO,id);
 
         if (category == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category no encotrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category doesn't exist");
         }
         return ResponseEntity.status(HttpStatus.OK).body(category);
     }
@@ -57,10 +57,10 @@ public class CategoryController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         if (!categoryService.delete(id)){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category no encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category doesn't exist");
         }
         categoryService.delete(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Category eliminado");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Category deleted");
     }
 }
 

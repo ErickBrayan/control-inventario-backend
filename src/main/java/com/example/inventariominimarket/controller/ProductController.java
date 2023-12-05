@@ -9,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
@@ -36,12 +34,7 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    /**
-     * Recupera una lista de productos que caducarán en el número especificado de días..
-     *
-     * @param days El número de días hasta la caducidad. Por defecto, es 20 si no se especifica.
-     * @return Un ResponseEntity que contiene la lista de productos y un código de estado 200 (OK).
-     */
+
     @GetMapping("/toExpired")
     public ResponseEntity<?> getProductToExpired(@RequestParam(required = false,defaultValue = "20") int days) {
 
