@@ -13,20 +13,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/category")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 @Slf4j
 public class CategoryController {
 
     private final CategoryService categoryService;
-    @GetMapping("")
+    @GetMapping("/categories")
     public ResponseEntity<?> getAll(){
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.findAll());
     }
 
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/category/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id) {
         CategoryResponseDTO category = categoryService.findById(id);
         log.info("Category: {}", category);
@@ -37,13 +37,13 @@ public class CategoryController {
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping("/category")
     public ResponseEntity<?> save(@RequestBody CategoryRequestDTO categoryRequestDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(categoryRequestDTO));
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/category/{id}")
     public ResponseEntity<?> update(@RequestBody CategoryRequestDTO categoryRequestDTO,@PathVariable Long id){
 
         Category category = categoryService.update(categoryRequestDTO,id);
@@ -54,7 +54,7 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(category);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/category/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         if (!categoryService.delete(id)){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category doesn't exist");

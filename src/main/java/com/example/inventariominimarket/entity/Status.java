@@ -1,5 +1,6 @@
 package com.example.inventariominimarket.entity;
 
-public enum SupplierStatus {
-    CREATED,DELETED
+public enum Status {
+    ACTIVE,
+    INACTIVE
 }

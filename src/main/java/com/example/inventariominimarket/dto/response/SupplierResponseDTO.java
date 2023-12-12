@@ -1,6 +1,6 @@
 package com.example.inventariominimarket.dto.response;
 
-import com.example.inventariominimarket.entity.SupplierStatus;
+import com.example.inventariominimarket.entity.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -33,5 +33,5 @@ public class SupplierResponseDTO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateDate;
 
-    private SupplierStatus supplierStatus;
+    private Status supplierStatus;
 }

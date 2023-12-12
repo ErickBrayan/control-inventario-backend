@@ -40,12 +40,12 @@ public class Supplier {
 
 
     @Enumerated(EnumType.STRING)
-    private SupplierStatus supplierStatus;
+    private Status supplierStatus;
 
 
     @PrePersist
     void setPrePersist(){
-        this.supplierStatus = SupplierStatus.CREATED;
+        this.supplierStatus = Status.ACTIVE;
     }
 
 }

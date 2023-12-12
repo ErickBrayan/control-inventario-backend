@@ -11,10 +11,10 @@ import java.util.List;
 
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier,Long> {
-    @Query("FROM Supplier s WHERE s.supplierStatus = com.example.inventariominimarket.entity.SupplierStatus.CREATED")
+    @Query("FROM Supplier s WHERE s.supplierStatus = com.example.inventariominimarket.entity.Status.ACTIVE")
     List<Supplier> findAllSupplier();
 
     @Modifying
-    @Query("UPDATE Supplier s SET s.supplierStatus = com.example.inventariominimarket.entity.SupplierStatus.DELETED WHERE s.id = :id")
+    @Query("UPDATE Supplier s SET s.supplierStatus = com.example.inventariominimarket.entity.Status.INACTIVE WHERE s.id = :id")
     Integer deleteSupplier(@Param("id") Long id);
 }

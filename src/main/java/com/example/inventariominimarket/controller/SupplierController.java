@@ -12,21 +12,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/supplier")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 @Slf4j
 public class SupplierController {
 
     private final SupplierService supplierService;
 
-    @GetMapping("")
+    @GetMapping("/suppliers")
     public ResponseEntity<?> getAll(){
         return ResponseEntity.status(HttpStatus.OK).body(supplierService.findAll());
     }
 
 
     //TODO: Add response message(JSON), When Supplier not found
-    @GetMapping("/{id}")
+    @GetMapping("/supplier/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id) {
 
         SupplierResponseDTO supplier = supplierService.findById(id);
@@ -36,13 +36,13 @@ public class SupplierController {
         return new ResponseEntity<>(supplier, HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping("/supplier")
     public ResponseEntity<?> save(@RequestBody SupplierRequestDTO supplierRequestDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(supplierService.save(supplierRequestDTO));
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/supplier/{id}")
     public ResponseEntity<?> update(@RequestBody SupplierRequestDTO supplierRequestDTO,@PathVariable Long id){
 
         Supplier supplier = supplierService.update(supplierRequestDTO,id);
@@ -53,7 +53,7 @@ public class SupplierController {
         return ResponseEntity.status(HttpStatus.OK).body(supplier);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/supplier/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         Integer res = supplierService.delete(id);
         if (res == 3 ){

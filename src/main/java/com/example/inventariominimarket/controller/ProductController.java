@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
-@RequestMapping("api/v1/product")
+@RequestMapping("api/v1")
 public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping("")
+    @GetMapping("/products")
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/product/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id) {
 
         ProductResponseDTO product = productService.findById(id);
@@ -35,36 +35,36 @@ public class ProductController {
     }
 
 
-    @GetMapping("/toExpired")
+    @GetMapping("/product/toExpired")
     public ResponseEntity<?> getProductToExpired(@RequestParam(required = false,defaultValue = "20") int days) {
 
         return new ResponseEntity<>(productService.findAllProductToExpired(days), HttpStatus.OK);
     }
 
-    @GetMapping("/byStock")
+    @GetMapping("/product/byStock")
     public ResponseEntity<?> getProductByStock(@RequestParam(required = false,defaultValue = "5") int stock) {
 
         return new ResponseEntity<>(productService.findAllProductByStock(stock), HttpStatus.OK);
     }
 
-    @GetMapping("/byCategory/{id}")
+    @GetMapping("/product/byCategory/{id}")
     public ResponseEntity<?> getProductByStock(@PathVariable Long id) {
 
         return new ResponseEntity<>(productService.findAllByCategory(id), HttpStatus.OK);
     }
-    @GetMapping("/byName/{name}")
+    @GetMapping("/product/byName/{name}")
     public ResponseEntity<?> getProductByStock(@PathVariable String name) {
 
         return new ResponseEntity<>(productService.findAllByName(name), HttpStatus.OK);
     }
 
 
-    @PostMapping("")
+    @PostMapping("/product")
     public ResponseEntity<?> save(@RequestBody ProductRequestDTO productRequestDTO) {
         return new ResponseEntity<>(productService.save(productRequestDTO), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/product/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ProductRequestDTO productRequestDTO) {
         Product product = productService.update(productRequestDTO,id);
         if (product == null) {
@@ -74,7 +74,7 @@ public class ProductController {
     }
 
 
-    @DeleteMapping ("/{id}")
+    @DeleteMapping ("/product/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
 
         Integer res = productService.delete(id);

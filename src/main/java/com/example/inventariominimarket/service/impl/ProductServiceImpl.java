@@ -3,7 +3,7 @@ package com.example.inventariominimarket.service.impl;
 import com.example.inventariominimarket.dto.request.ProductRequestDTO;
 import com.example.inventariominimarket.entity.Category;
 import com.example.inventariominimarket.entity.Product;
-import com.example.inventariominimarket.entity.ProductStatus;
+import com.example.inventariominimarket.entity.Status;
 import com.example.inventariominimarket.mapper.ProductMapper;
 import com.example.inventariominimarket.dto.response.ProductResponseDTO;
 import com.example.inventariominimarket.repository.ProductRepository;
@@ -85,7 +85,7 @@ public class ProductServiceImpl implements ProductService {
         boolean isPresent = productRepository.findById(id).isPresent();
         Product product = productMapper.toEntity(productRequestDTO);
         product.setId(id);
-        product.setProductStatus(ProductStatus.CREATED);
+        product.setProductStatus(Status.ACTIVE);
         return isPresent ? productRepository.save(product) : null;
     }
 

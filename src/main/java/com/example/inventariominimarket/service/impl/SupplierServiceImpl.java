@@ -3,8 +3,8 @@ package com.example.inventariominimarket.service.impl;
 
 import com.example.inventariominimarket.dto.request.SupplierRequestDTO;
 import com.example.inventariominimarket.dto.response.SupplierResponseDTO;
+import com.example.inventariominimarket.entity.Status;
 import com.example.inventariominimarket.entity.Supplier;
-import com.example.inventariominimarket.entity.SupplierStatus;
 import com.example.inventariominimarket.mapper.SupplierMapper;
 import com.example.inventariominimarket.repository.SupplierRepository;
 import com.example.inventariominimarket.service.SupplierService;
@@ -54,7 +54,7 @@ public class SupplierServiceImpl implements SupplierService {
         boolean isPresent = supplierRepository.findById(id).isPresent();
         Supplier supplier = supplierMapper.toEntity(supplierRequestDTO);
         supplier.setId(id);
-        supplier.setSupplierStatus(SupplierStatus.CREATED);
+        supplier.setSupplierStatus(Status.ACTIVE);
         return isPresent ? supplierRepository.save(supplier) : null;
     }
 

@@ -46,7 +46,7 @@ public class Product{
     private LocalDate dueDate;
 
     @Enumerated(EnumType.STRING)
-    private ProductStatus productStatus;
+    private Status productStatus;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_category")
@@ -54,6 +54,6 @@ public class Product{
 
     @PrePersist
     void setPrePersit(){
-        this.productStatus = ProductStatus.CREATED;
+        this.productStatus = Status.ACTIVE;
     }
 }
